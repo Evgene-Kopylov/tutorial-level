@@ -293,12 +293,8 @@ impl Scene {
                 let dist = (dx.powf(2.) + dy.powf(2.)).sqrt();
                 if dist < u.radius {
                     u.hit_points -= 20.;
-                    audio::play_sound(
+                    audio::play_sound_once(
                         &u.impact_sound,
-                        PlaySoundParams {
-                            volume: ENEMY_UNIT_IMPACT_SOUND_VOLUME,
-                            looped: false
-                        },
                     );
 
                     let da = u.rotation - p.rotation;

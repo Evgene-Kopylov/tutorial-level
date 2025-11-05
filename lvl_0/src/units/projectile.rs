@@ -35,12 +35,8 @@ impl Projectile {
         position: Vec2,
         speed: f32,
     ) -> Self {
-        audio::play_sound(
+        audio::play_sound_once(
             &shoot_sound,
-            PlaySoundParams {
-                volume: MAIN_UNIT_SHOOT_SOUND_VOLUME,
-                looped: false
-            },
         );
 
         let size = Vec2::new(texture.width(), texture.height());

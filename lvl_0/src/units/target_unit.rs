@@ -77,12 +77,8 @@ impl TargetUnit {
             };
 
             // Проигрывает звук столкновения
-            audio::play_sound(
+            audio::play_sound_once(
                 &self.impact_sound,
-                PlaySoundParams {
-                    volume,
-                    looped: false
-                },
             );
         }
     }
