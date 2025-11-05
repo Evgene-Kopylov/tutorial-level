@@ -28,7 +28,7 @@ impl EnemyUnit {
         let color = BLACK;
 
         Self {
-            texture,
+            texture: texture.clone(),
             shadow_texture,
             color,
             position: spawn_position,
@@ -45,7 +45,7 @@ impl EnemyUnit {
         let color = if self.alive { BROWN } else { GREEN };
 
         draw_texture_ex(
-            self.texture,
+            &self.texture,
             self.position.x - self.texture.width() * 0.5 + self.shift.x,
             self.position.y - self.texture.height() * 0.5 - self.shift.y,
             color,
@@ -62,7 +62,7 @@ impl EnemyUnit {
         let mut color = self.color;
         color.a = 0.2;
         draw_texture_ex(
-            self.texture,
+            &self.texture,
             self.position.x - self.texture.width() * 0.5 + 3. * height,
             self.position.y - self.texture.height() * 0.5 + 4. * height,
             color,

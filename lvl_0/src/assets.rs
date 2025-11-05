@@ -1,8 +1,9 @@
 //! ассеты с предворительной загрузкой
 
 use macroquad::audio::{load_sound, Sound};
-use macroquad::prelude::{info, FileError};
+use macroquad::prelude::{info};
 use macroquad::texture::{load_texture, Texture2D};
+use macroquad::Error;
 
 /// Набор ассетов. Текстуры и звуки.
 pub(crate) struct Assets {
@@ -17,7 +18,7 @@ pub(crate) struct Assets {
 
 impl Assets {
     /// Читать файлы ассетов
-    pub async fn new() -> Result<Self, FileError> {
+    pub async fn new() -> Result<Self, Error> {
         info!("WASM LOG: Начало загрузки текстур");
         let main_unit_texture: Texture2D = load_texture("../assets/pointer/pointer_3.png").await?;
         let main_unit_shoot_sound: Sound = load_sound("../assets/sound/4 XSA_Weapon.wav").await?;

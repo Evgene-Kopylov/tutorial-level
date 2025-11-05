@@ -35,11 +35,11 @@ impl Scene {
         let assets = Assets::new().await.unwrap();
 
         let mut scene = Self {
-            main_unit: MainUnit::new(assets.main_unit_texture, spawn_position),
+            main_unit: MainUnit::new(assets.main_unit_texture.clone(), spawn_position),
             target_unit: TargetUnit::new(
-                assets.target_unit_texture,
-                assets.target_unit_shadow_texture,
-                assets.target_impact_sound,
+                assets.target_unit_texture.clone(),
+                assets.target_unit_shadow_texture.clone(),
+                assets.target_impact_sound.clone(),
                 target_unit_position,
             ),
             enemy_units: Vec::new(),
@@ -85,9 +85,9 @@ impl Scene {
         let x = self.target_unit.position.x + dx;
         let y = self.target_unit.position.y + dy;
         let unit = EnemyUnit::new(
-            self.assets.enemy_unit_gray,
-            self.assets.target_unit_shadow_texture,
-            self.assets.target_impact_sound,
+            self.assets.enemy_unit_gray.clone(),
+            self.assets.target_unit_shadow_texture.clone(),
+            self.assets.target_impact_sound.clone(),
             Vec2 { x, y },
         );
         self.enemy_units.push(unit);
@@ -228,8 +228,8 @@ impl Scene {
             );
 
             let projectile = Projectile::new(
-                self.assets.projectile_texture,
-                self.assets.main_unit_shoot_sound,
+                self.assets.projectile_texture.clone(),
+                self.assets.main_unit_shoot_sound.clone(),
                 self.main_unit.rotation,
                 position,
                 self.main_unit.speed * 3.,
@@ -294,10 +294,10 @@ impl Scene {
                 if dist < u.radius {
                     u.hit_points -= 20.;
                     audio::play_sound(
-                        u.impact_sound,
+                        &u.impact_sound,
                         PlaySoundParams {
                             volume: ENEMY_UNIT_IMPACT_SOUND_VOLUME,
-                            ..Default::default()
+                            looped: false
                         },
                     );
 

@@ -36,10 +36,10 @@ impl Projectile {
         speed: f32,
     ) -> Self {
         audio::play_sound(
-            shoot_sound,
+            &shoot_sound,
             PlaySoundParams {
                 volume: MAIN_UNIT_SHOOT_SOUND_VOLUME,
-                ..Default::default()
+                looped: false
             },
         );
 
@@ -89,7 +89,7 @@ impl Projectile {
     /// Отрисовывает проектайл.
     pub fn draw(&self) {
         draw_texture_ex(
-            self.texture,
+            &self.texture,
             self.position.x - self.size.x * 0.50,
             self.position.y - self.size.y * 0.50,
             PROJECTILE_COLOR,

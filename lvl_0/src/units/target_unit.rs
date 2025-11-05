@@ -40,7 +40,7 @@ impl TargetUnit {
         color.a = 0.45;
 
         Self {
-            texture,
+            texture: texture.clone(),
             shadow_texture,
             color,
             position: spawn_position,
@@ -78,10 +78,10 @@ impl TargetUnit {
 
             // Проигрывает звук столкновения
             audio::play_sound(
-                self.impact_sound,
+                &self.impact_sound,
                 PlaySoundParams {
                     volume,
-                    ..Default::default()
+                    looped: false
                 },
             );
         }
@@ -104,7 +104,7 @@ impl TargetUnit {
         let color = if self.alive { WHITE } else { GREEN };
 
         draw_texture_ex(
-            self.texture,
+            &self.texture,
             self.position.x - self.texture.width() * 0.5 + self.shift.x,
             self.position.y - self.texture.height() * 0.5 - self.shift.y,
             color,
@@ -120,7 +120,7 @@ impl TargetUnit {
         let height = 3.;
 
         draw_texture_ex(
-            self.shadow_texture,
+            &self.shadow_texture,
             self.position.x - self.texture.width() * 0.5 + 3. * height,
             self.position.y - self.texture.height() * 0.5 + 4. * height,
             self.color,
